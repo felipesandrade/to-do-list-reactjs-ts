@@ -1,16 +1,16 @@
-import styles from './Task.module.css';
+import styles from './List.module.css';
 
 import  clipboardLogo from '../assets/clipboard.svg';
 
-export function Task() {
+export function List() {
     return (
-        <article className={styles.task}>
+        <article className={styles.list}>
             <header>
-                <div className={styles.taskCreated}>
+                <div className={styles.listCreated}>
                     <strong>Tarefas criadas</strong>
                     <span>0</span>
                 </div>
-                <div className={styles.taskDone}>
+                <div className={styles.listDone}>
                     <strong>Concluídas</strong>
                     <span>0</span>
                 </div>

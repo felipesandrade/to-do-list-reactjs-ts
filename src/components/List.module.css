@@ -1,4 +1,4 @@
-.task {
+.list {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -12,7 +12,7 @@
     
 }
 
-.task header {
+.list header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -24,7 +24,7 @@
 
 }
 
-.task header span {
+.list header span {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -47,7 +47,7 @@
 
     color: var(--white);
 }
-.taskCreated {
+.listCreated {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -65,7 +65,7 @@
     color: var(--blue);
 }
 
-.taskDone {
+.listDone {
     display: flex;
     flex-direction: row;
     align-items: center;
