@@ -1,6 +1,7 @@
 import styles from './List.module.css';
 
 import  clipboardLogo from '../assets/clipboard.svg';
+import { Task } from './Task';
 
 export function List() {
     return (
@@ -19,6 +20,10 @@ export function List() {
                 <img className={styles.imgClipboard} src={clipboardLogo} alt="Logo Clipboard" />
                 <strong>Você ainda não tem tarefas cadastradas</strong>
                 <span>Crie tarefas e organize seus itens a fazer</span>
+            </div>
+            <div>
+                <Task />
+                <Task />
             </div>
         </article>
     );
