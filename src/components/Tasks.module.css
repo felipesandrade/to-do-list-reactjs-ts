@@ -1,4 +1,4 @@
-.list {
+.tasks {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -12,7 +12,7 @@
     
 }
 
-.list header {
+.tasks header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -24,7 +24,7 @@
 
 }
 
-.list header span {
+.tasks header span {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -47,7 +47,7 @@
 
     color: var(--white);
 }
-.listCreated {
+.tasksCreated {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -65,7 +65,7 @@
     color: var(--blue);
 }
 
-.listDone {
+.tasksDone {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -116,4 +116,75 @@
 .imgClipboard {
     width: 4.66rem;
     height: 4.66rem;
+}
+
+.newtask {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    gap: 0.5rem;
+
+    position: absolute;
+    width: 46rem;
+    height: 3.375rem;
+    left: calc(50% - 46rem/2);
+    top: 10.812rem;
+
+    flex: none;
+    order: 0;
+    flex-grow: 1;
+}
+
+.newtask input {
+    box-sizing: border-box;
+
+    padding: 1rem;
+    gap: 8px;
+    
+    width: 39.875rem;
+    height: 3.375rem;
+
+    background: var(--gray-500);
+    border: 1px solid var(--gray-700);
+    border-radius: 0.5rem;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 140%;
+
+    color: var(--gray-300);
+}
+
+.newtask button {
+
+    padding: 1rem;
+    gap: 0.5rem;
+    margin-left: 0.5rem;
+
+    width: 5.625rem;
+    height: 3.375rem;
+
+    background: var(--blue-dark);
+    border: none;
+    border-radius: 0.5rem;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.875rem;
+    line-height: 140%;
+
+    color: var(--white);
+
+}
+
+.newtask span {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
 }
