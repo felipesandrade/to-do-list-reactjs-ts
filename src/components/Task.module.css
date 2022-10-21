@@ -49,4 +49,8 @@
     text-decoration: line-through;
 }
 
+.trash {
+    border-radius: 0.25rem;
+}
+
 
