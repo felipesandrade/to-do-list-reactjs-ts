@@ -8,16 +8,19 @@ import styles from './Task.module.css';
 interface TaskProps {
     content: string;
     onDeleteTask: (content: string) => void;
+    onDoneTask: (content: boolean) => void;
 }
 
-export function Task({ content, onDeleteTask }: TaskProps) {
+export function Task({ content, onDeleteTask, onDoneTask }: TaskProps) {
     const [isCompleted, setIsCompleted] = useState(false);
 
     function handleTaskComplete() {
         if(!isCompleted) {
             setIsCompleted(true);
+            onDoneTask(true);
         } else {
             setIsCompleted(false);
+            onDoneTask(false);
         }
 
     }

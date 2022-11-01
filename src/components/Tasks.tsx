@@ -14,6 +14,8 @@ export function Tasks() {
 
     const [countTasks, setCountTasks] = useState(0);
 
+    const [countDoneTasks, setCountDoneTasks] = useState(0);
+
     function handleCreateNewTask (event: FormEvent) {
         event.preventDefault();
 
@@ -35,11 +37,25 @@ export function Tasks() {
             return task !== taskToDelete;
         });
 
-        setTasks(tasksWithoutDeleteOne);
-
         setCountTasks((state) => {
             return state - 1;
-        })
+        });
+
+        setTasks(tasksWithoutDeleteOne);
+
+    }
+
+    function onDoneTask(taskToDone: boolean) {
+        if(taskToDone) {
+            setCountDoneTasks(state => {
+                return state + 1;
+            });
+        } else {
+            setCountDoneTasks(state => {
+                return state - 1;
+            });
+        }
+        
     }
 
     return (
@@ -66,7 +82,7 @@ export function Tasks() {
                     </div>
                     <div className={styles.tasksDone}>
                         <strong>Concluídas</strong>
-                        <span>0</span>
+                        <span>{countDoneTasks !== 0 ? `${countDoneTasks} de ${countTasks}` : '0'}</span>
                     </div>
                 </header>
                 <div>
@@ -83,6 +99,7 @@ export function Tasks() {
                                             key={task}
                                             content={task}
                                             onDeleteTask={onDeleteTask}
+                                            onDoneTask={onDoneTask}
                                         />
                             }      
                         }
