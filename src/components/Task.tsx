@@ -37,7 +37,7 @@ export function Task({ content, onDeleteTask, onDoneTask }: TaskProps) {
             >
                 {isCompleted ? <BsFillCheckCircleFill /> : <div /> }
            </button>
-            <p className={isCompleted ? styles.checkText : ""}>{content}</p>
+            <p className={isCompleted ? styles.checkText : styles.unckeckedText}>{content}</p>
             <Trash 
                 className={styles.trash}
                 size={24}

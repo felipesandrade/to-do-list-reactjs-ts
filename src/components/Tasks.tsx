@@ -82,7 +82,7 @@ export function Tasks() {
                     </div>
                     <div className={styles.tasksDone}>
                         <strong>Concluídas</strong>
-                        <span>{countDoneTasks !== 0 ? `${countDoneTasks} de ${countTasks}` : '0'}</span>
+                        <span>{countDoneTasks !== 0 ? `${countDoneTasks} de ${countTasks}` : `0 de ${countTasks}`}</span>
                     </div>
                 </header>
                 <div>
