@@ -184,6 +184,10 @@
     color: var(--gray-300);
 }
 
+.newtask input:focus {
+    color: var(--white);
+}
+
 .newtask button {
 
     padding: 1rem;

@@ -1,61 +1,60 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react';
+//import { v4 as uuidv4 } from 'uuid';
 
 import { PlusCircle } from 'phosphor-react';
 import clipboardLogo from '../assets/clipboard.svg';
 
 import { Task } from './Task';
+import { ITTask } from '../App';
+
 
 import styles from './Tasks.module.css';
 
-export function Tasks() {
-    const [tasks, setTasks] = useState(['']);
+interface Props {
+  tasks: ITTask[];
+  onCreateNewTask: (taskContent: string) => void; 
+  onDeleteTask: (content: string) => void;
+  onDoneTask: (content: string) => void;
+}
+
+export function Tasks({ tasks, onCreateNewTask, onDeleteTask, onDoneTask }: Props) {
+
+    const countTasks = tasks.length;
+
+    let countDoneTasks = 0;
+    
+    const doneTasks = tasks.forEach(task => {
+        if(task.isCompleted === true) {
+            countDoneTasks += 1;
+        };
+    });
 
     const [newTask, setNewTask] = useState('');
 
-    const [countTasks, setCountTasks] = useState(0);
-
-    const [countDoneTasks, setCountDoneTasks] = useState(0);
-
-    function handleCreateNewTask (event: FormEvent) {
+    function handleCreateNewTask( event: FormEvent ) {
         event.preventDefault();
 
-        setTasks([...tasks, newTask]);
-
-        setCountTasks((state) => {
-            return state + 1;
-        });
+        onCreateNewTask(newTask);
 
         setNewTask('');
     }
 
     function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
+        event.target.setCustomValidity('');
+
         setNewTask(event.target.value);
     }
 
-    function onDeleteTask(taskToDelete: string) {
-        const tasksWithoutDeleteOne = tasks.filter(task => {
-            return task !== taskToDelete;
-        });
-
-        setCountTasks((state) => {
-            return state - 1;
-        });
-
-        setTasks(tasksWithoutDeleteOne);
-
+    function handleOnDelete(TaskToDelete: string) {
+        onDeleteTask(TaskToDelete);
     }
 
-    function onDoneTask(taskToDone: boolean) {
-        if(taskToDone) {
-            setCountDoneTasks(state => {
-                return state + 1;
-            });
-        } else {
-            setCountDoneTasks(state => {
-                return state - 1;
-            });
-        }
-        
+    function handleDoneTask(TaskToDone: string) {
+        onDoneTask(TaskToDone);
+    }
+
+    function handleNewTaskInvalid(event: InvalidEvent<HTMLInputElement>) {
+        event.target.setCustomValidity('Este campo é obrigatório!');
     }
 
     return (
@@ -67,6 +66,8 @@ export function Tasks() {
                                 placeholder='Adicine uma nova tarefa'
                                 value={newTask}
                                 onChange={handleNewTaskChange}
+                                onInvalid={handleNewTaskInvalid}
+                                required={true}
                             />
                             
                             <button type='submit'>
@@ -87,19 +88,19 @@ export function Tasks() {
                 </header>
                 <div>
                     {tasks.map(task => {
-                        if(tasks.length === 1) {
-                            return <div className={styles.content}>
+                        if(tasks.length === 0) {
+                            return <div key={task.id} className={styles.content}>
                                         <img className={styles.imgClipboard} src={clipboardLogo} alt="Logo Clipboard" />
                                         <strong>Você ainda não tem tarefas cadastradas</strong>
                                         <span>Crie tarefas e organize seus itens a fazer</span>
                                     </div>
                         } else {
-                            if(task !== '') {
+                            if(tasks.length !== 0) {
                                 return <Task 
-                                            key={task}
-                                            content={task}
-                                            onDeleteTask={onDeleteTask}
-                                            onDoneTask={onDoneTask}
+                                           key={task.id}
+                                           task={task}
+                                           onDeleteTask={handleOnDelete}
+                                           onDoneTask={handleDoneTask}
                                         />
                             }      
                         }

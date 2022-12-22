@@ -3,30 +3,24 @@ import { useState } from 'react';
 import { Trash } from 'phosphor-react';
 import { BsFillCheckCircleFill } from 'react-icons/bs';
 
+import { ITTask } from '../App';
+
 import styles from './Task.module.css';
 
-interface TaskProps {
-    content: string;
+interface Props {
+    task: ITTask;
     onDeleteTask: (content: string) => void;
-    onDoneTask: (content: boolean) => void;
+    onDoneTask: (content: string) => void;
 }
 
-export function Task({ content, onDeleteTask, onDoneTask }: TaskProps) {
-    const [isCompleted, setIsCompleted] = useState(false);
+export function Task({ task, onDeleteTask, onDoneTask }: Props) {
 
     function handleTaskComplete() {
-        if(!isCompleted) {
-            setIsCompleted(true);
-            onDoneTask(true);
-        } else {
-            setIsCompleted(false);
-            onDoneTask(false);
-        }
-
+        onDoneTask(task.id);
     }
 
     function handleDeleteTask() {
-        onDeleteTask(content);
+        onDeleteTask(task.id);
     }
 
     return (
@@ -35,9 +29,9 @@ export function Task({ content, onDeleteTask, onDoneTask }: TaskProps) {
                 className={styles.checkContainer} 
                 onClick={handleTaskComplete}
             >
-                {isCompleted ? <BsFillCheckCircleFill /> : <div /> }
+                {task.isCompleted ? <BsFillCheckCircleFill /> : <div /> }
            </button>
-            <p className={isCompleted ? styles.checkText : styles.unckeckedText}>{content}</p>
+            <p className={task.isCompleted ? styles.checkText : styles.unckeckedText}>{task.content}</p>
             <Trash 
                 className={styles.trash}
                 size={24}
